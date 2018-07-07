@@ -17,43 +17,43 @@ public class Poblacion {
 	}
 	public void killGacela(Gacela gacela, int cause) {
 		if(cause>7 || cause<1){
-			throw new IllegalArgumentException("Esta causa de muerte no esta contemplada por el programa");
+			System.out.println(("Esta causa de muerte no esta contemplada por el programa"));
 		}
 		vivas.remove(gacela);
 		gacela.setDeathCause(cause);
 		muertas.add(gacela);
 	}
 	public Gacela bornGacela(Gacela dad, Gacela mom) {
-
+		Gacela hijo = new Gacela();
 		int mid = dad.getSequence().length()/2;
-
 		String ultimapartedad = dad.getSequence().substring(mid);
 		String primerapartedad =  dad.getSequence().substring(0, mid);
 
 		String ultimapartemom =  mom.getSequence().substring(mid);
 		String primerapartemom =  mom.getSequence().substring(0, mid);
-
-//		if(tienen 2 hijos){
-//
-//			String hijo1 = primerapartedad.concat(ultimapartemom);
-//			String hijo2 = primerapartemom.concat(ultimapartedad);
-//		}
-		if(tiene 1 hijo) {
-			Gacela hijo = new Gacela();
+		if(dad.getCualidad() == 6 || mom.getCualidad() == 6) {
+			return null;
+		}
+		else if(dad.getCualidad() == 7 && mom.getCualidad() == 7) {
 			hijo.setSequence(primerapartedad.concat(ultimapartemom));
-	}
+			vivas.add(hijo);
+		}
+		//		if(tienen 2 hijos){
+		//
+		//			String hijo1 = primerapartedad.concat(ultimapartemom);
+		//			String hijo2 = primerapartemom.concat(ultimapartedad);
+		//		}
 		return hijo;
 	}
-	
-	public void addGacela(Gacela gacela) {
-		vivas.add(gacela);
-	}
+
 	public int cantVivas() {
 		return this.vivas.size();
 	}
+	
 	public int cantMuertas() {
 		return this.muertas.size();
 	}
+	
 
 	public void setPoblacionInicial(List<Gacela> list) {
 		for (Gacela gacela : list) {

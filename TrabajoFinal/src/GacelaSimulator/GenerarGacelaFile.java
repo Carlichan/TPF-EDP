@@ -28,13 +28,13 @@ public class GenerarGacelaFile {
 	public static String generarGacela() {
 		String gacela = "";
 		HashMap<Integer,String> fixedSequence = new HashMap<Integer,String>();
-		fixedSequence.put(1,"ACGGTAAAC"); 
-		fixedSequence.put(2, "AACACGTTG");
-		fixedSequence.put(3, "GGCTTATGA");
-		fixedSequence.put(4, "CTCATGTTA");
-		fixedSequence.put(5, "ACTTTACGA");
-		fixedSequence.put(6, "CCGATATGT");
-		fixedSequence.put(7, "GGTTAAACG");
+		fixedSequence.put(1,"ACGGTAAAC");  //comida leones
+		fixedSequence.put(2, "AACACGTTG"); // comida cocos
+		fixedSequence.put(3, "GGCTTATGA"); // enfermedad
+		fixedSequence.put(4, "CTCATGTTA"); // hambruna
+		fixedSequence.put(5, "ACTTTACGA"); // alergia
+		fixedSequence.put(6, "CCGATATGT"); // esteril
+		fixedSequence.put(7, "GGTTAAACG"); // 1 hijo
 		//fixedSequence.put(8, "AAGCCTTCG");
 		
 		for(int i = 0; i<BASES_QUANTITY-FIXED_SEQUENCE_QUANTITY ; i++) {
