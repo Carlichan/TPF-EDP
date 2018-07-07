@@ -1,6 +1,6 @@
 package GacelaSimulator;
 
-import java.util.HashMap;
+
 
 public class Gacela {
 	private String sequence;

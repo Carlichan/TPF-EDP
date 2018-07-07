@@ -2,6 +2,7 @@ package GacelaSimulator;
 
 import java.util.LinkedList;
 import java.util.List;
+import GacelaSimulator.Gacela;
 
 public class Poblacion {
 	private List<Gacela> muertas = new LinkedList<Gacela>();
@@ -23,7 +24,7 @@ public class Poblacion {
 		muertas.add(gacela);
 	}
 	public Gacela bornGacela(Gacela dad, Gacela mom) {
-		//se tiene en cuenta que g1 y g1 tienen el mismo lenght
+
 		int mid = dad.getSequence().length()/2;
 
 		String ultimapartedad = dad.getSequence().substring(mid);
@@ -38,9 +39,10 @@ public class Poblacion {
 //			String hijo2 = primerapartemom.concat(ultimapartedad);
 //		}
 		if(tiene 1 hijo) {
-
-			String hijo1 = primerapartedad.concat(ultimapartemom);
-		}
+			Gacela hijo = new Gacela();
+			hijo.setSequence(primerapartedad.concat(ultimapartemom));
+	}
+		return hijo;
 	}
 	
 	public void addGacela(Gacela gacela) {
