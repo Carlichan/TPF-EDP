@@ -114,7 +114,7 @@ public class GacelaReader {
 				}
 			}
 			else {
-				throw new IllegalArgumentException("this is not a gazelle");
+				System.out.println(("Esto no es una gacela"));
 			}
 		}
 		return gacelaList;
