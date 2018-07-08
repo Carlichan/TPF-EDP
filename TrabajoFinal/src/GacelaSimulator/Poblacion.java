@@ -8,7 +8,7 @@ public class Poblacion {
 	private List<Gacela> muertas = new LinkedList<Gacela>();
 	private List<Gacela> vivas = new LinkedList<Gacela>();	
 	private List<Gacela> hijos = new LinkedList<Gacela>();	
-
+	
 	private int cantidadDeGeneraciones;
 
 	public void aumentarCantDeGeneraciones() {
@@ -18,21 +18,26 @@ public class Poblacion {
 		return this.cantidadDeGeneraciones;
 	}
 	public void killGacela(Gacela gacela, int cause) {
-		if(cause>7 || cause<1){
+		if(cause > 7 || cause < 1){
 			System.out.println(("Esta causa de muerte no esta contemplada por el programa"));
 		}
-		vivas.remove(gacela);
 		gacela.setDeathCause(cause);
 		muertas.add(gacela);
+		vivas.remove(gacela);
 	}
 	public void bornGacela(Gacela dad, Gacela mom) {
+		
 		Gacela hijo = new Gacela();
 		Gacela hijo2 = new Gacela();
+		
 		int mid = dad.getSequence().length()/2;
+		
 		String ultimapartedad = dad.getSequence().substring(mid);
 		String primerapartedad =  dad.getSequence().substring(0, mid);
+
 		String ultimapartemom =  mom.getSequence().substring(mid);
 		String primerapartemom =  mom.getSequence().substring(0, mid);
+		
 		if(dad.getCualidad() == 6 || mom.getCualidad() == 6) {
 		}
 		else if(dad.getCualidad() == 7 || mom.getCualidad() == 7) {
@@ -40,8 +45,11 @@ public class Poblacion {
 			hijos.add(hijo);
 		}
 		else{
+			//SETIE LA SECUENCIA DE LOS DOS HIJOS Y LAS AGREGE A LA LISTA HIJOS
+			// HAY QUE TENER EN CUENTA QUE SI NO TIENEN NINGUN GEN DE LOS SELEC. VAN A TENER 2 HIJOS 
+	
 			hijo.setSequence(primerapartedad.concat(ultimapartemom));
-			hijo2.setSequence(primerapartemom.concat(ultimapartedad)); 
+			hijo2.setSequence(primerapartemom.concat(ultimapartedad));
 			hijos.add(hijo);
 			hijos.add(hijo2);
 		}
@@ -56,52 +64,36 @@ public class Poblacion {
 	}
 
 	public void reproduccion() {
-		gacelasParaReproduccion();
-		for(Gacela gacelita : hijos) {
-			//mutar(input 1,, input 2);
+		if(getCantDeGeneraciones() == 1) {
+			
+
+			}
+		}
+		for(int i = 0; i<(vivas.size())*(0.8); i++) {
+
 		}
 	}
-
-
-	public void gacelasParaReproduccion() { // arma una lista de mamas y papas y hace que tengan hijos
+	public void gacelasParaReproduccion() {
 		List<Gacela> listRep = new LinkedList<Gacela>();
 		List<Gacela> momList = new LinkedList<Gacela>();
 		List<Gacela> dadList = new LinkedList<Gacela>();
 		listRep = vivas;
-		int aSacar = (int) (listRep.size() * 0.2);
-
-		for(int i = 0; i < aSacar; i++) {
-			listRep.remove(Menu.getRandomIntBetween(0, listRep.size()-1));
-		}
-
-		if(listRep.size() % 2 == 1) {
-			listRep.remove(Menu.getRandomIntBetween(0, listRep.size()-1));
-		}
-
-		int vecesARepartir = listRep.size() - 1;
-		for(int i = 0; i < vecesARepartir; i ++) {
-			int randomMom = Menu.getRandomIntBetween(0, vecesARepartir);
+	
+		for(int i = 0; i<(listRep.size())*(0.8); i++) {
+			int randomMom = Menu.getRandomIntBetween(0, listRep.size()-1);
 			momList.add(listRep.get(randomMom));
 			listRep.remove(randomMom);
-			int randomDad = Menu.getRandomIntBetween(0, vecesARepartir);
+			int randomDad = Menu.getRandomIntBetween(0, listRep.size()-1);
 			dadList.add(listRep.get(randomDad));
 			listRep.remove(randomDad);
-
 		}
+
 		if(momList.size() == dadList.size()) {
 			for(int i = 0; i<momList.size(); i++) {
+				
 				bornGacela(dadList.get(i), momList.get(i));
 			}
-			//		}else if (momList.size() < dadList.size()){
-			//			dadList.remove(0);
-			//			for(int i = 0; i<momList.size(); i++) {
-			//				bornGacela(dadList.get(i), momList.get(i));
-			//			}
-			//		} else if (momList.size() > dadList.size()){
-			//			momList.remove(0);
-			//			for(int i = 0; i<momList.size(); i++) {
-			//				bornGacela(dadList.get(i), momList.get(i));
-			//			}
+
 		}
 	}
 	public void setPoblacionInicial(List<Gacela> list) {

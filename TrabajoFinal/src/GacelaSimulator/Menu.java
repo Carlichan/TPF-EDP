@@ -25,11 +25,11 @@ public class Menu {
 		finalizacion(scanner);
 
 	}
-	public static void siguienteGeneracion(Scanner scanner, Poblacion pob) {
+	public static void siguienteGeneracion(Scanner scanner1, Scanner scanner2 , Poblacion pob) {
 		System.out.println("Por favor ingrese base/s a modificar");
-		String viejo = getInput(scanner);
+		String viejo = getInput(scanner1);
 		System.out.println("Por favor ingrese nueva/s base/s");
-		String nuevo = getInput(scanner);
+		String nuevo = getInput(scanner2);
 		pob.reproduccion();
 	}
 
@@ -79,14 +79,16 @@ public class Menu {
 			else if(gacela.getDeathCause() == 7) {
 				System.out.println(deathCauses.get(7));
 			}
+			//	CUAL ES LA CAUSA DE MUERTE N 8?????
 			else if(gacela.getDeathCause() == 8) {
 				System.out.println(deathCauses.get(8));
 			}
 		}
 	}
 
-	public static void option4() {
-	}
+//	public static void option4() {
+//	}
+	
 	public static void drawBienvenida() {
 		System.out.println("Bienvenido a Gacela Simulator"); 
 		System.out.println("Por favor ingrese el path a su archivo.txt");
