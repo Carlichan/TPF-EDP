@@ -26,13 +26,15 @@ public class Menu {
 
 	}
 	public static void siguienteGeneracion(Scanner scanner1, Scanner scanner2 , Poblacion pob) {
+		//LE AGREGE UN SCANNER MAS, HAY QUE PROBAR SI FUNCIONA Y TAMBIEN HICE QUE 
+		//REPRODUCCION NECESITE LOS STRING DADOS POR EL USUARIO
 		System.out.println("Por favor ingrese base/s a modificar");
 		String viejo = getInput(scanner1);
 		System.out.println("Por favor ingrese nueva/s base/s");
 		String nuevo = getInput(scanner2);
-		pob.reproduccion();
+		pob.reproduccion(String viejo, String nuevo);
 	}
-
+//HAY UN GETRANDOM EN GACELAFILE!!
 	public static int getRandomIntBetween(int min, int max) {
 		if (max < min) {
 			throw new IllegalArgumentException();
@@ -48,6 +50,7 @@ public class Menu {
 
 	public static void option3(List<Gacela> gacelasMuertas, Poblacion pob) {
 		HashMap<Integer,String> deathCauses = new HashMap<Integer,String>();
+	
 		deathCauses.put(1, "Comida de leones");
 		deathCauses.put(2, "Comida de cocodrilos");
 		deathCauses.put(3, "Enfermedad");
@@ -58,6 +61,8 @@ public class Menu {
 
 		for (Gacela gacela : gacelasMuertas) {
 			System.out.println("La cantidad de gacelas muertas es: " + gacelasMuertas.size());
+		
+			System.out.println("Las causas de muerte son: ");
 			if(gacela.getDeathCause() == 1) {
 				System.out.println(deathCauses.get(1));
 			}
@@ -124,6 +129,7 @@ public class Menu {
 		} 
 		else if (opcion.equalsIgnoreCase("3")) {
 			//option3(, pob);
+			
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("q")) {

@@ -17,6 +17,8 @@ public class Poblacion {
 	public int getCantDeGeneraciones() {
 		return this.cantidadDeGeneraciones;
 	}
+	
+	
 	public void killGacela(Gacela gacela, int cause) {
 		if(cause > 7 || cause < 1){
 			System.out.println(("Esta causa de muerte no esta contemplada por el programa"));
@@ -25,7 +27,8 @@ public class Poblacion {
 		muertas.add(gacela);
 		vivas.remove(gacela);
 	}
-	public void bornGacela(Gacela dad, Gacela mom) {
+	
+    public void bornGacela(Gacela dad, Gacela mom) {
 		
 		Gacela hijo = new Gacela();
 		Gacela hijo2 = new Gacela();
@@ -63,16 +66,19 @@ public class Poblacion {
 		return this.muertas.size();
 	}
 
-	public void reproduccion() {
-		if(getCantDeGeneraciones() == 1) {
-			
-
+	public void reproduccion(String viejo, String nuevo) {
+		gacelasParaReproduccion();
+		//ya se reproducen 
+		
+		//falta seleccionar al 50 % de los hijos y mutarlos 
+		//o sea seleccionar a la mitad y a cada gacela modificarla para volverla a meter en hijos
+		
+		for( Gacela hijo : hijos) {
+		 hijo.mutar()
 			}
 		}
-		for(int i = 0; i<(vivas.size())*(0.8); i++) {
-
-		}
-	}
+	
+	
 	public void gacelasParaReproduccion() {
 		List<Gacela> listRep = new LinkedList<Gacela>();
 		List<Gacela> momList = new LinkedList<Gacela>();
@@ -96,6 +102,7 @@ public class Poblacion {
 
 		}
 	}
+	
 	public void setPoblacionInicial(List<Gacela> list) {
 		for (Gacela gacela : list) {
 			this.vivas.add(gacela);

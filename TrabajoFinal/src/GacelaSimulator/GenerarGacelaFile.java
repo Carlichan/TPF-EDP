@@ -20,6 +20,7 @@ public class GenerarGacelaFile {
 		System.out.println(gacela);
 		try {
 		writeToFile("C:\\Users\\User\\Desktop\\GacelaFile.txt", gacela);
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,11 +55,13 @@ public class GenerarGacelaFile {
 				break;
 			}
 		}
+	//PARA QUE ES ESTO????
 		int cualidad = getRandomIntBetween(1, 7);
 		gacela += fixedSequence.get(cualidad);
 		//gacela += cualidad;
 		return gacela;
 	}
+	
 	public static int getRandomIntBetween(int min, int max) {
 		if (max < min) {
 			throw new IllegalArgumentException();
