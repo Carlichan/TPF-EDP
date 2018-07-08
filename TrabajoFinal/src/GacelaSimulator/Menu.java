@@ -17,7 +17,7 @@ public class Menu {
 		pob.setPoblacionInicial(GacelaReader.createGacelas(GacelaReader.readFile(getInput(scanner))));
 		inicializacion(scanner);
 
-		while(InputDoer(getInput(scanner), pob)) { //Ciclo principal del programa
+		while(InputDoer(getInput(scanner), pob, scanner)) { //Ciclo principal del programa
 			
 			drawMenu();			
 		}
@@ -25,7 +25,13 @@ public class Menu {
 		finalizacion(scanner);
 
 	}
-
+	public static void siguienteGeneracion(Scanner scanner, Poblacion pob) {
+		System.out.println("Por favor ingrese base/s a modificar");
+		String viejo = getInput(scanner);
+		System.out.println("Por favor ingrese nueva/s base/s");
+		String nuevo = getInput(scanner);
+		pob.reproduccion();
+	}
 
 	public static int getRandomIntBetween(int min, int max) {
 		if (max < min) {
@@ -33,7 +39,8 @@ public class Menu {
 		}
 		return (int) Math.floor(Math.random()*(max-min+1)+min);
 	}
-	public static void option1(List<String> inputs) {
+	public static void option1(Scanner scanner, Poblacion pob) {
+		siguienteGeneracion(scanner, pob);
 	}
 
 	public static void option2(String input) {
@@ -104,9 +111,9 @@ public class Menu {
 		return sc.next(); 
 	}
 	
-	public static boolean InputDoer(String opcion, Poblacion pob) {
+	public static boolean InputDoer(String opcion, Poblacion pob, Scanner scanner) {
 		if (opcion.equalsIgnoreCase("1")) {
-			//	generar nueva generacion
+			option1(scanner, pob);
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("2")) {

@@ -44,12 +44,11 @@ public class Gacela {
 		return this.deathCause;
 	}
 
-	public Gacela mutacion(String viejo , String nuevo , Gacela gacela) {
+	public void mutar(String viejo , String nuevo) {
 		if(nuevo.matches("[A*C*G*T*]*")) {
-			if (gacela.getSequence().contains(viejo)) {		
-				gacela.getSequence().replaceAll(viejo, nuevo);		
+			if (this.getSequence().contains(viejo)) {		
+				this.getSequence().replaceAll(viejo, nuevo);		
 			}
 		}
-		return gacela;
 	}
 }

@@ -56,11 +56,13 @@ public class Poblacion {
 	}
 
 	public void reproduccion() {
-			gacelasParaReproduccion();
-			Gacela.mutacion
+		gacelasParaReproduccion();
+		for(Gacela gacelita : hijos) {
+			//mutar(input 1,, input 2);
 		}
-		
 	}
+
+
 	public void gacelasParaReproduccion() { // arma una lista de mamas y papas y hace que tengan hijos
 		List<Gacela> listRep = new LinkedList<Gacela>();
 		List<Gacela> momList = new LinkedList<Gacela>();
@@ -90,16 +92,16 @@ public class Poblacion {
 			for(int i = 0; i<momList.size(); i++) {
 				bornGacela(dadList.get(i), momList.get(i));
 			}
-//		}else if (momList.size() < dadList.size()){
-//			dadList.remove(0);
-//			for(int i = 0; i<momList.size(); i++) {
-//				bornGacela(dadList.get(i), momList.get(i));
-//			}
-//		} else if (momList.size() > dadList.size()){
-//			momList.remove(0);
-//			for(int i = 0; i<momList.size(); i++) {
-//				bornGacela(dadList.get(i), momList.get(i));
-//			}
+			//		}else if (momList.size() < dadList.size()){
+			//			dadList.remove(0);
+			//			for(int i = 0; i<momList.size(); i++) {
+			//				bornGacela(dadList.get(i), momList.get(i));
+			//			}
+			//		} else if (momList.size() > dadList.size()){
+			//			momList.remove(0);
+			//			for(int i = 0; i<momList.size(); i++) {
+			//				bornGacela(dadList.get(i), momList.get(i));
+			//			}
 		}
 	}
 	public void setPoblacionInicial(List<Gacela> list) {
