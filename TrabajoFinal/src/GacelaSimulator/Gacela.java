@@ -10,6 +10,7 @@ public class Gacela {
 
 	public void deathCauses() {
 		HashMap<Integer,String> fixedSequence = new HashMap<Integer,String>();
+		
 		fixedSequence.put(1,"ACGGTAAAC");  //comida leones
 		fixedSequence.put(2, "AACACGTTG"); // comida cocos
 		fixedSequence.put(3, "GGCTTATGA"); // enfermedad

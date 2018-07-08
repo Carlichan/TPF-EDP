@@ -58,7 +58,7 @@ public class GacelaReader {
 			else if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {//6 esteril
 				//SOFI: EN ESTA PARTE TENGO DUDA XQ ESTA RECORRIEDO LOS CASOS DE MUERTE DE NUEVO
 				//CUANDO YA LOS HABIA RECORRIDO ANTERIORMENTE,
-				//PARA MI HABRIA QUE BORRARLOS Y PONER EL CASO ESTERI Y UN HIJO SIN EL ELSE DE LOS CASOS
+				//PARA MI HABRIA QUE BORRARLOS Y PONER EL CASO ESTERI Y UN HIJO A PARTE, SIN EL ELSE DE LOS CASOS
 				//DE MUERTE
 				if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {
 					gacela.setSequence(sequence[j]);
@@ -90,7 +90,8 @@ public class GacelaReader {
 					gacelaList.add(gacela);
 				}
 			}
-			else if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
+			else 
+				if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
 
 				if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {
 					gacela.setSequence(sequence[j]);

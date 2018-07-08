@@ -18,7 +18,7 @@ public class Menu {
 		inicializacion(scanner);
 
 		while(InputDoer(getInput(scanner), pob, scanner)) { //Ciclo principal del programa
-			
+
 			drawMenu();			
 		}
 
@@ -34,7 +34,8 @@ public class Menu {
 		String nuevo = getInput(scanner2);
 		pob.reproduccion(String viejo, String nuevo);
 	}
-//HAY UN GETRANDOM EN GACELAFILE!!
+
+	//HAY UN GETRANDOM EN GACELAFILE, POR AHI ESTE ESTA DE MAS
 	public static int getRandomIntBetween(int min, int max) {
 		if (max < min) {
 			throw new IllegalArgumentException();
@@ -50,7 +51,7 @@ public class Menu {
 
 	public static void option3(List<Gacela> gacelasMuertas, Poblacion pob) {
 		HashMap<Integer,String> deathCauses = new HashMap<Integer,String>();
-	
+
 		deathCauses.put(1, "Comida de leones");
 		deathCauses.put(2, "Comida de cocodrilos");
 		deathCauses.put(3, "Enfermedad");
@@ -61,7 +62,7 @@ public class Menu {
 
 		for (Gacela gacela : gacelasMuertas) {
 			System.out.println("La cantidad de gacelas muertas es: " + gacelasMuertas.size());
-		
+
 			System.out.println("Las causas de muerte son: ");
 			if(gacela.getDeathCause() == 1) {
 				System.out.println(deathCauses.get(1));
@@ -85,15 +86,15 @@ public class Menu {
 				System.out.println(deathCauses.get(7));
 			}
 			//	CUAL ES LA CAUSA DE MUERTE N 8?????
-			else if(gacela.getDeathCause() == 8) {
-				System.out.println(deathCauses.get(8));
-			}
+			//			else if(gacela.getDeathCause() == 8) {
+			//				System.out.println(deathCauses.get(8));
+			//			}
 		}
 	}
 
-//	public static void option4() {
-//	}
-	
+	//	public static void option4() {
+	//	}
+
 	public static void drawBienvenida() {
 		System.out.println("Bienvenido a Gacela Simulator"); 
 		System.out.println("Por favor ingrese el path a su archivo.txt");
@@ -117,7 +118,7 @@ public class Menu {
 	public static String getInput(Scanner sc) {
 		return sc.next(); 
 	}
-	
+
 	public static boolean InputDoer(String opcion, Poblacion pob, Scanner scanner) {
 		if (opcion.equalsIgnoreCase("1")) {
 			option1(scanner, pob);
@@ -125,11 +126,13 @@ public class Menu {
 		} 
 		else if (opcion.equalsIgnoreCase("2")) {
 			//	listar vivas por generacion
+		
+			
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("3")) {
 			//option3(, pob);
-			
+
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("q")) {
