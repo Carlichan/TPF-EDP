@@ -2,7 +2,7 @@ package GacelaSimulator;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -25,22 +25,25 @@ public class Menu {
 		finalizacion(scanner);
 
 	}
-	public static void siguienteGeneracion(Scanner scanner1, Scanner scanner2 , Poblacion pob) {
-		//LE AGREGE UN SCANNER MAS, HAY QUE PROBAR SI FUNCIONA Y TAMBIEN HICE QUE 
-		//REPRODUCCION NECESITE LOS STRING DADOS POR EL USUARIO
+	public static void siguienteGeneracion(Scanner scanner, Poblacion pob) {
 		System.out.println("Por favor ingrese base/s a modificar");
-		String viejo = getInput(scanner1);
-		System.out.println("Por favor ingrese nueva/s base/s");
-		String nuevo = getInput(scanner2);
-		pob.reproduccion(String viejo, String nuevo);
+		String viejo = getInput(scanner);
+		if(viejo.matches("(A|C|G|T|a|c|g|t)")) {
+			System.out.println("Por favor ingrese nueva/s base/s");
+		} else {
+			System.out.println("Debe ingersar una de las 4 bases nitrogenadas");
+			//drawMenu();
+		}		
+		String nuevo = getInput(scanner);
+		if(nuevo.matches("(A|C|G|T|a|g|c|t)")) {
+			pob.reproduccion(viejo.charAt(0), nuevo.charAt(0));
+		} else {
+			System.out.println("Debe ingersar una de las 4 bases nitrogenadas");
+			//drawMenu();
+		}			
 	}
-//HAY UN GETRANDOM EN GACELAFILE!!
-	public static int getRandomIntBetween(int min, int max) {
-		if (max < min) {
-			throw new IllegalArgumentException();
-		}
-		return (int) Math.floor(Math.random()*(max-min+1)+min);
-	}
+
+
 	public static void option1(Scanner scanner, Poblacion pob) {
 		siguienteGeneracion(scanner, pob);
 	}
@@ -84,9 +87,8 @@ public class Menu {
 			else if(gacela.getDeathCause() == 7) {
 				System.out.println(deathCauses.get(7));
 			}
-			//	CUAL ES LA CAUSA DE MUERTE N 8?????
-			else if(gacela.getDeathCause() == 8) {
-				System.out.println(deathCauses.get(8));
+			else  {
+			
 			}
 		}
 	}
