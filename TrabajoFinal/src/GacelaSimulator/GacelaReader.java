@@ -10,11 +10,12 @@ import java.util.List;
 
 public class GacelaReader {
 	public static void main(String[] args) throws IOException {
+		Poblacion pob = new Poblacion();
 		String text = readFile("C:\\Users\\User\\Desktop\\GacelaFile.txt");
 		System.out.println("el string es: " + text);
-		System.out.println(createGacelas(text));
+		System.out.println(createGacelas(text, pob));
 	}
-	public static List<Gacela> createGacelas(String text) {
+	public static List<Gacela> createGacelas(String text, Poblacion pob) {
 		String[] sequence = text.split("\r\n");
 		List<Gacela> gacelaList = new LinkedList<Gacela>();
 
@@ -87,6 +88,7 @@ public class GacelaReader {
 				System.out.println(("Esto no es una gacela"));
 			}
 		}
+		pob.setPoblacionInicial(gacelaList);
 		return gacelaList;
 	}
 

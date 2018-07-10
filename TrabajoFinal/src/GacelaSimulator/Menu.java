@@ -1,6 +1,7 @@
 package GacelaSimulator;
 
 import java.io.IOException;
+import java.io.LineNumberInputStream;
 import java.util.HashMap;
 
 import java.util.List;
@@ -14,57 +15,49 @@ public class Menu {
 		Poblacion pob = new Poblacion();
 		Scanner scanner = new Scanner(System.in); 
 		drawBienvenida();
-		pob.setPoblacionInicial(GacelaReader.createGacelas(GacelaReader.readFile(getInput(scanner))));
+		pob.setPoblacionInicial(GacelaReader.createGacelas(GacelaReader.readFile(getInput(scanner)), pob));
 		inicializacion(scanner);
 
 		while(InputDoer(getInput(scanner), pob, scanner)) { //Ciclo principal del programa
-			
 			drawMenu();			
 		}
 
 		finalizacion(scanner);
 
 	}
-	public static void siguienteGeneracion(Scanner scanner, Poblacion pob) {
+
+	public static void option1(Scanner scanner, Poblacion pob) {
 		System.out.println("Por favor ingrese base a modificar");
 		String viejo = getInput(scanner);
 		if(viejo.matches("(A|C|G|T|a|c|g|t)")) {
 			System.out.println("Por favor ingrese nueva base");
+			String nuevo = getInput(scanner);
+			if(nuevo.matches("(A|C|G|T|a|g|c|t)")) {
+				pob.reproduccion(viejo.charAt(0), nuevo.charAt(0));
+			} else {
+				System.out.println("Debe ingresar una de las 4 bases nitrogenadas");
+				System.out.println();
+			}	
 		} else {
 			System.out.println("Debe ingresar una de las 4 bases nitrogenadas");
-			drawMenu();
+			System.out.println();
 		}		
-		String nuevo = getInput(scanner);
-		if(nuevo.matches("(A|C|G|T|a|g|c|t)")) {
-			pob.reproduccion(viejo.charAt(0), nuevo.charAt(0));
-		} else {
-			System.out.println("Debe ingresar una de las 4 bases nitrogenadas");
-		}			
-	}
-
-
-	public static void option1(Scanner scanner, Poblacion pob) {
-		siguienteGeneracion(scanner, pob);
 	}
 
 	public static void option2(String input) {
 	}
 
 	public static void option3(List<Gacela> gacelasMuertas, Poblacion pob) {
-		HashMap<Integer,String> deathCauses = new HashMap<Integer,String>();
-	
+		HashMap<Integer,String> deathCauses = new HashMap<Integer,String>();	
 		deathCauses.put(1, "Comida de leones");
 		deathCauses.put(2, "Comida de cocodrilos");
 		deathCauses.put(3, "Enfermedad");
 		deathCauses.put(4, "Hambruna");
 		deathCauses.put(5, "Alergia");
-		deathCauses.put(6, "Mutacion");
-		deathCauses.put(7, "Vejez");
-
-		for (Gacela gacela : gacelasMuertas) {
-			System.out.println("La cantidad de gacelas muertas es: " + gacelasMuertas.size());
-		
-			System.out.println("Las causas de muerte son: ");
+		deathCauses.put(6, "Vejez");
+		System.out.println("La cantidad de gacelas muertas es: " + gacelasMuertas.size());	
+		System.out.println("Las causas de muerte son: ");
+		for (Gacela gacela : gacelasMuertas) {		
 			if(gacela.getDeathCause() == 1) {
 				System.out.println(deathCauses.get(1));
 			}
@@ -83,18 +76,15 @@ public class Menu {
 			else if(gacela.getDeathCause() == 6) {
 				System.out.println(deathCauses.get(6));
 			}
-			else if(gacela.getDeathCause() == 7) {
-				System.out.println(deathCauses.get(7));
-			}
 			else  {
-			
+
 			}
 		}
 	}
 
-//	public static void option4() {
-//	}
-	
+	//	public static void option4() {
+	//	}
+
 	public static void drawBienvenida() {
 		System.out.println("Bienvenido a Gacela Simulator"); 
 		System.out.println("Por favor ingrese el path a su archivo.txt");
@@ -124,13 +114,12 @@ public class Menu {
 			option1(scanner, pob);
 			return true;
 		} 
-		else if (opcion.equalsIgnoreCase("2")) {
-			//	listar vivas por generacion
+		else if (opcion.equalsIgnoreCase("2")) {		
+			pob.listarVivas();
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("3")) {
-			//option3(, pob);
-			
+			option3(pob.getMuertas(), pob);
 			return true;
 		} 
 		else if (opcion.equalsIgnoreCase("q")) {

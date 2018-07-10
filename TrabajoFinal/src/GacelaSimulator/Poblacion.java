@@ -13,12 +13,19 @@ public class Poblacion {
 	private int cantidadDeGeneraciones;
 	private Stack<List<Gacela>> generaciones = new Stack<>();
 
+	public List<Gacela> getMuertas(){
+		return this.muertas;
+	}
 	public void aumentarCantDeGeneraciones() {
 		this.cantidadDeGeneraciones++;
 	}
 	public int getCantDeGeneraciones() {
 		return this.cantidadDeGeneraciones;
 	}
+	public List<Gacela> getVivas(){
+		return this.vivas;
+	}
+
 	//PENSE COMO HACER LO DE LAS GENERACIONES, 
 	//TENIENDO EN CUENTA NECESITAMOS UNA ESTRUCTURA QUE LAS ALMACENE 
 	//PENSE EN PONER LAS LISTAS EN UNA PILA "GENERACIONES" Y QUE LAS VAYA ALMACENANDO 
@@ -34,27 +41,27 @@ public class Poblacion {
 	// DECIME QUE TE PARECE  Y SINO PENSAMOS OTRA COSA
 
 
-
-	public void insertGeneracion(List<Gacela> Gen) {
-		generaciones.push(Gen);
-	}
-
-	public int getGeneracion(List<Gacela> gen) {	
-		Stack<List<Gacela>> generacionesCopia = generaciones;
-		Stack<List<Gacela>> moment = new Stack<>();
-		int size = generaciones.size();
-		int generacion = 0;
-		for(int i = 0 ; i < size; i++) {		
-			if( gen != generacionesCopia.peek() ) {
-				moment.push(generacionesCopia.pop());
-			} else {
-				generacion = generacionesCopia.size() - 1;
-				return generacion;
-			}		
-		} 
-		return -1;
-		//-1 significa que no existe la lista gen,en la pila generaciones 		
-	}
+	//
+	//	public void insertGeneracion(List<Gacela> Gen) {
+	//		generaciones.push(Gen);
+	//	}
+	//
+	//	public int getGeneracion(List<Gacela> gen) {	
+	//		Stack<List<Gacela>> generacionesCopia = generaciones;
+	//		Stack<List<Gacela>> moment = new Stack<>();
+	//		int size = generaciones.size();
+	//		int generacion = 0;
+	//		for(int i = 0 ; i < size; i++) {		
+	//			if( gen != generacionesCopia.peek() ) {
+	//				moment.push(generacionesCopia.pop());
+	//			} else {
+	//				generacion = generacionesCopia.size() - 1;
+	//				return generacion;
+	//			}		
+	//		} 
+	//		return -1;
+	//-1 significa que no existe la lista gen,en la pila generaciones 		
+	//}
 
 	//ACA HICE EL LISTAR VIVAS
 	//PRIMERO IMPRIME LA GENERACION Y LUEGO LA LISTA DE LAS GACELAS QUE PERTENECEN A ESA GENERACION
@@ -64,26 +71,57 @@ public class Poblacion {
 
 
 
-	public void listarVivas() {
-
-		for(int i = 0; i < generaciones.size(); i++) {
-
-			List<Gacela> lista = generaciones.peek(); 
-			System.out.println("la generacion es: " + getGeneracion(lista));
-
-			for(int j = 0 ; j < lista.size(); j++) {
-
-				System.out.println(lista.get(j).getSequence());
-			}
-
-
-		}
-
-	}
-
+	//	public void listarVivas1() {
+	//
+	//		for(int i = 0; i < generaciones.size(); i++) {
+	//
+	//			List<Gacela> lista = generaciones.peek(); 
+	//			System.out.println("la generacion es: " + getGeneracion(lista));
+	//
+	//			for(int j = 0 ; j < lista.size(); j++) {
+	//
+	//				System.out.println(lista.get(j).getSequence());
+	//			}
+	//
+	//
+	//		}
+	//
+	//	}
+	//
 
 	//HASTA ACA LLEGA LO DE LA GENERACION
 
+
+
+	public void listarVivas() {
+		for(Gacela gacelita : ordenarLista(this.vivas)) {	
+			System.out.println("La secuencia de la gacela es: " + gacelita.getSequence() + " y su generacion es: " + gacelita.getGeneracion());
+			System.out.println("su cualidad es " + gacelita.getCualidad());
+		}
+		System.out.println();
+	}
+
+	public List<Gacela> ordenarLista(List<Gacela> list){
+		List<Gacela> ordenada = new LinkedList<Gacela>();
+		
+		if(this.getCantDeGeneraciones() == 0 || this.getCantDeGeneraciones() == 1) {
+			return list;
+		}
+			
+		for(int i = 0; i < this.getCantDeGeneraciones()-1; i++ ) {
+			
+			for(Gacela gacelita : list) {
+				if(gacelita.getGeneracion() == i) {
+					ordenada.add(gacelita);
+				}
+			}
+		}
+		return ordenada;
+	}
+
+	public List<Gacela> getHijos(){
+		return this.hijos;
+	}
 
 	public void killGacela(Gacela gacela, int cause) {
 		if(cause > 7 || cause < 1){
@@ -94,11 +132,7 @@ public class Poblacion {
 		vivas.remove(gacela);
 	}
 
-	public void bornGacela(Gacela dad, Gacela mom,char viejo, char nuevo) {
-
-		Gacela hijo = new Gacela();
-		Gacela hijo2 = new Gacela();
-
+	public void bornGacela(Gacela dad, Gacela mom, char viejo, char nuevo) {
 		int mid = dad.getSequence().length()/2;
 
 		String ultimapartedad = dad.getSequence().substring(mid);
@@ -111,76 +145,60 @@ public class Poblacion {
 
 		}
 		else if(dad.getCualidad() == 7 || mom.getCualidad() == 7) {
+			Gacela hijo = new Gacela();
 			hijo.setSequence(primerapartedad.concat(ultimapartemom));
+			hijo.setGeneracion(this.cantidadDeGeneraciones);
 			hijos.add(hijo);
 		}
 		else{
-			//SETIE LA SECUENCIA DE LOS DOS HIJOS Y LAS AGREGE A LA LISTA HIJOS
-			// HAY QUE TENER EN CUENTA QUE SI NO TIENEN NINGUN GEN DE LOS SELEC. VAN A TENER 2 HIJOS 
-
+			Gacela hijo = new Gacela();
+			Gacela hijo2 = new Gacela();
 			hijo.setSequence(primerapartedad.concat(ultimapartemom));
+			hijo.setGeneracion(this.cantidadDeGeneraciones);
 			hijo2.setSequence(primerapartemom.concat(ultimapartedad));
+			hijo2.setGeneracion(this.cantidadDeGeneraciones);
 			hijos.add(hijo);
 			hijos.add(hijo2);
 		}
-		List<Gacela> listRep = new LinkedList<Gacela>();
-		listRep = hijos;
-		int aSacar = (int) (listRep.size() * 0.5);
-		for(int i = 0; i < aSacar; i++) {
-			listRep.remove(GenerarGacelaFile.getRandomIntBetween(0, listRep.size()-1));
-		}
-		for(Gacela hijo1 : listRep) {
-			hijo1.mutar(viejo,nuevo);
-		}
-		
-		for(int i = 0; i < listRep.size(); i++) {
-			Gacela gacela = listRep.get(i);
+	}
+
+	public void hijosPorMorir(List<Gacela> lista) {
+		for(int i = 0; i < lista.size(); i++) {
+			Gacela gacela = lista.get(i);
 			String s = gacela.getSequence();
 			if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {//1 comida de leones
 				killGacela(gacela, 1);
-				muertas.add(gacela);
+				
 			}
 			else if(s.matches("[A*C*T*G*]*AACACGTTG[A*C*T*G*]*")) {//2 comida de cocos
 				killGacela(gacela, 2);
-				muertas.add(gacela);
+				
 			}
 			else if(s.matches("[A*C*T*G*]*GGCTTATGA[A*C*T*G*]*")) {//3 enfermedad
 				killGacela(gacela, 3);
-				muertas.add(gacela);
+				
 			}
 			else if(s.matches("[A*C*T*G*]*CTCATGTTA[A*C*T*G*]*")) {//4 hambruna
 				killGacela(gacela, 4);
-				muertas.add(gacela);
+				
 			}
 			else if(s.matches("[A*C*T*G*]*ACTTTACGA[A*C*T*G*]*")) {//5 alergia
 				killGacela(gacela, 5);
-				muertas.add(gacela);
+				
 			}
 			else if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {//6 esteril
-					vivas.add(gacela);
-					gacela.setCualidad(6);
+				vivas.add(gacela);
+				gacela.setCualidad(6);
 			}		
 			else if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
-					vivas.add(gacela);
-					gacela.setCualidad(7);
-					if(mom.getGeneracion()>= dad.getGeneracion()) {
-						gacela.setGeneracion(mom.getGeneracion()+1);
-					}else {
-						gacela.setGeneracion(dad.getGeneracion()+1);
-					}
-					
+				vivas.add(gacela);
+				gacela.setCualidad(7);
 			}
 			else {
 				vivas.add(gacela);
-				if(mom.getGeneracion()>= dad.getGeneracion()) {
-					gacela.setGeneracion(mom.getGeneracion()+1);
-				}else {
-					gacela.setGeneracion(dad.getGeneracion()+1);
-				}
 			}
 		}
 	}
-
 	public int cantVivas() {
 		return this.vivas.size();
 	}
@@ -190,18 +208,35 @@ public class Poblacion {
 	}
 
 	public void reproduccion(char viejo, char nuevo) {
+		this.aumentarCantDeGeneraciones();
 		gacelasParaReproduccion(viejo,  nuevo);
-		//ya se reproducen, falta seleccionar al 50 % de los hijos y mutarlos 
-		//o sea seleccionar a la mitad y a cada gacela modificarla para volverla a meter en hijos
-		
-	}
 
+		List<Gacela> hijosNoMutados = new LinkedList<Gacela>();
+		List<Gacela> listRep = new LinkedList<Gacela>();
+		listRep = copiarLista(hijos);
+		int aSacar = (int) (listRep.size() * 0.5); // preparacion para mutar
+		for(int i = 0; i < aSacar; i++) {
+			hijosNoMutados.add(listRep.remove(GenerarGacelaFile.getRandomIntBetween(0, listRep.size()-1)));
+		}
+		for(Gacela hijo1 : listRep) {
+			hijo1.mutar(viejo,nuevo);
+		}
+		hijosPorMorir(hijosNoMutados);
+		hijosPorMorir(listRep);
+	}
+	public List<Gacela> copiarLista(List<Gacela> copia){
+		List<Gacela> lista = new LinkedList<Gacela>();
+		for(Gacela gacelita : copia) {
+			lista.add(gacelita);
+		}
+		return lista;
+	}
 
 	public void gacelasParaReproduccion(char viejo, char nuevo) { // arma una lista de mamas y papas y hace que tengan hijos
 		List<Gacela> listRep = new LinkedList<Gacela>();
 		List<Gacela> momList = new LinkedList<Gacela>();
 		List<Gacela> dadList = new LinkedList<Gacela>();
-		listRep = vivas;
+		listRep = copiarLista(vivas);
 		int aSacar = (int) (listRep.size() * 0.2);
 
 		for(int i = 0; i < aSacar; i++) {
@@ -232,14 +267,30 @@ public class Poblacion {
 			}
 		}
 		if(momList.size() == dadList.size()) {
-			for(int i = 0; i<momList.size(); i++) {
+			for(int i = 0; i<momList.size()-1; i++) {
 				bornGacela(dadList.get(i), momList.get(i), viejo, nuevo);
 			}
 		}
 	}
 
-
 	public void setPoblacionInicial(List<Gacela> list) {
-		vivas = list;
+		vivas = copiarLista(list);
+	}
+
+	public static void main(String[] args) {
+		Poblacion a = new Poblacion();
+		Gacela gacela = new Gacela();
+		Gacela gacelamama = new Gacela();
+		gacela.setSequence("aaaaaaaaaa");
+		gacelamama.setSequence("tttttttttt");
+		a.vivas.add(gacela);
+		a.vivas.add(gacelamama);
+		System.out.println(a.getVivas());
+		char viejo ='a';
+		char nuevo = 'g';
+		a.reproduccion(viejo, nuevo);
+		System.out.println(a.getHijos());
+		System.out.println(a.getVivas());
+
 	}
 }
