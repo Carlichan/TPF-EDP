@@ -36,7 +36,7 @@ public class GenerarGacelaFile {
 		fixedSequence.put(5, "ACTTTACGA"); // alergia
 		fixedSequence.put(6, "CCGATATGT"); // esteril
 		fixedSequence.put(7, "GGTTAAACG"); // 1 hijo
-		//fixedSequence.put(8, "AAGCCTTCG");
+		//fixedSequence.put(8, "AAGCCTTCG"); // 2 hijos
 		
 		for(int i = 0; i<BASES_QUANTITY-FIXED_SEQUENCE_QUANTITY ; i++) {
 			int a = getRandomIntBetween(1, 4);

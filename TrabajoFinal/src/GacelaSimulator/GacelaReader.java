@@ -30,7 +30,6 @@ public class GacelaReader {
 
 			Gacela gacela = new Gacela();
 			String s = sequence[j];
-
 			if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {//1 comida de leones
 				gacela.setSequence(sequence[j]);
 				gacela.setCualidad(1);
@@ -56,7 +55,7 @@ public class GacelaReader {
 				gacela.setCualidad(5);
 				gacelaList.add(gacela);
 			}
-			else if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {//6 esteril
+			if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {//6 esteril
 				//SOFI: EN ESTA PARTE TENGO DUDA XQ ESTA RECORRIEDO LOS CASOS DE MUERTE DE NUEVO
 				//CUANDO YA LOS HABIA RECORRIDO ANTERIORMENTE,
 				//PARA MI HABRIA QUE BORRARLOS Y PONER EL CASO ESTERI Y UN HIJO SIN EL ELSE DE LOS CASOS
@@ -64,88 +63,30 @@ public class GacelaReader {
 				//CARLI: lo puse por si tenia ambos genes, en caso de que encontrase primero el de esterilidad
 				// prevaleceria el de muerte entonces lo puse asi. por ahi haya una mejor forma de hacerlo
 				// por ahi con una regex de esas asi (|) pero no se 
-				if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(1);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*AACACGTTG[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(2);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*GGCTTATGA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(3);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*CTCATGTTA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(4);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*ACTTTACGA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(5);
-					gacelaList.add(gacela);
-				}else {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(6);
-					gacelaList.add(gacela);
-				}
-			}
-			else if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
 
-				if(s.matches("[A*C*T*G*]*ACGGTAAAC[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(1);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*AACACGTTG[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(2);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*GGCTTATGA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(3);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*CTCATGTTA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(4);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*ACTTTACGA[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(5);
-					gacelaList.add(gacela);
-				}
-				else if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(6);
-					gacelaList.add(gacela);
-				}
-				else {
-					gacela.setSequence(sequence[j]);
-					gacela.setCualidad(7);
-					gacelaList.add(gacela);
-				}
+				gacela.setSequence(sequence[j]);
+				gacela.setCualidad(6);
+				gacelaList.add(gacela);
+
 			}
-			else {
-				//TENIENDO EN CUENTA QUE SE PUEDE TENER GACELAS SIN GENES ESPECIF
-				// HICE UNA EXP REGULAR PARA EL CASO DE QUE  NO SEA NINGUNA DE LAS LETRAS
-				//ESPECIFICADAS (ACGT), ENTONCES NO ES UNA GACELA 
-				if(s.matches("(B*[D-F]*[H-S]*[U-Z]*)*")){
+			if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
+
+
+				gacela.setSequence(sequence[j]);
+				gacela.setCualidad(7);
+				gacelaList.add(gacela);
+			}
+			//TENIENDO EN CUENTA QUE SE PUEDE TENER GACELAS SIN GENES ESPECIF
+			// HICE UNA EXP REGULAR PARA EL CASO DE QUE  NO SEA NINGUNA DE LAS LETRAS
+			//ESPECIFICADAS (ACGT), ENTONCES NO ES UNA GACELA 
+			if(s.matches("(B*[D-F]*[H-S]*[U-Z]*)*")){
 				//CARLI: sofi, este metodo lee lo que mandan como generacion 0, la generacion 0
 				//si o si contiene alguna da las secuencias, igual esta bien agregar una regex 
 				// por si el usuario mando cualquier cosa, tambien habria que mejorar las 
 				// regex para que las secuencias sean de 50 letras.
-					System.out.println(("Esto no es una gacela"));
-				}
+				System.out.println(("Esto no es una gacela"));
 			}
 		}
-		
 		return gacelaList;
 	}
 

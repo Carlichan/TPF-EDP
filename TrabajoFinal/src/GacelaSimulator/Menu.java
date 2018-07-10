@@ -26,20 +26,19 @@ public class Menu {
 
 	}
 	public static void siguienteGeneracion(Scanner scanner, Poblacion pob) {
-		System.out.println("Por favor ingrese base/s a modificar");
+		System.out.println("Por favor ingrese base a modificar");
 		String viejo = getInput(scanner);
 		if(viejo.matches("(A|C|G|T|a|c|g|t)")) {
-			System.out.println("Por favor ingrese nueva/s base/s");
+			System.out.println("Por favor ingrese nueva base");
 		} else {
-			System.out.println("Debe ingersar una de las 4 bases nitrogenadas");
-			//drawMenu();
+			System.out.println("Debe ingresar una de las 4 bases nitrogenadas");
+			drawMenu();
 		}		
 		String nuevo = getInput(scanner);
 		if(nuevo.matches("(A|C|G|T|a|g|c|t)")) {
 			pob.reproduccion(viejo.charAt(0), nuevo.charAt(0));
 		} else {
-			System.out.println("Debe ingersar una de las 4 bases nitrogenadas");
-			//drawMenu();
+			System.out.println("Debe ingresar una de las 4 bases nitrogenadas");
 		}			
 	}
 

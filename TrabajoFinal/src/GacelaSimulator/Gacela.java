@@ -51,6 +51,7 @@ public class Gacela {
 				sec =sec.replace('z', nuevo);
 				sec =sec.replace('y', viejo);
 				this.setSequence(sec);	
+
 	}
 	
 	public static void main(String[] args) {
@@ -59,7 +60,9 @@ public class Gacela {
 		g.setSequence(a);
 		g.mutar('t', 'c');
 		System.out.println(g.getSequence());
-		
+//		if(contiene un gen de muerte muere) {
+//			
+//		}
 	}
 
 }
