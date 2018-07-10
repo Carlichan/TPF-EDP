@@ -130,6 +130,9 @@ public class Poblacion {
 		gacela.setDeathCause(cause);
 		muertas.add(gacela);
 		vivas.remove(gacela);
+		if(hijos.contains(gacela)) {
+			hijos.remove(gacela);
+		}	
 	}
 
 	public void bornGacela(Gacela dad, Gacela mom, char viejo, char nuevo) {
@@ -188,14 +191,17 @@ public class Poblacion {
 			}
 			else if(s.matches("[A*C*T*G*]*CCGATATGT[A*C*T*G*]*")) {//6 esteril
 				vivas.add(gacela);
+				hijos.remove(gacela);
 				gacela.setCualidad(6);
 			}		
 			else if(s.matches("[A*C*T*G*]*GGTTAAACG[A*C*T*G*]*")) {//7 1 hijo
 				vivas.add(gacela);
+				hijos.remove(gacela);
 				gacela.setCualidad(7);
 			}
 			else {
 				vivas.add(gacela);
+				hijos.remove(gacela);
 			}
 		}
 	}
