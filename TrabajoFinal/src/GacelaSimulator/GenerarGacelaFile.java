@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class GenerarGacelaFile {
 	private final static int BASES_QUANTITY = 50;
 	private final static int FIXED_SEQUENCE_QUANTITY = 9;
-	private final static int GACELA_QUANTITY = 6;
+	private final static int GACELA_QUANTITY = 10;
 	private final static String NORMALIZATED_FILE_SEPARATOR = "/";
 
 	public static void main(String[] args) {
@@ -56,6 +56,8 @@ public class GenerarGacelaFile {
 			}
 		}
 		int cualidad = getRandomIntBetween(1, 7);
+		if(cualidad > 7)
+			cualidad = 7;
 		gacela += fixedSequence.get(cualidad);
 		return gacela;
 	}

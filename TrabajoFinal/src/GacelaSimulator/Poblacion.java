@@ -108,7 +108,7 @@ public class Poblacion {
 			return list;
 		}
 			
-		for(int i = 0; i < this.getCantDeGeneraciones()-1; i++ ) {
+		for(int i = 0; i < this.getCantDeGeneraciones()+1; i++ ) {
 			
 			for(Gacela gacelita : list) {
 				if(gacelita.getGeneracion() == i) {
@@ -253,29 +253,25 @@ public class Poblacion {
 			listRep.remove(GenerarGacelaFile.getRandomIntBetween(0, listRep.size()-1));
 		}
 
-		int vecesARepartir = listRep.size() - 1;
+		int vecesARepartir = listRep.size()/2;
 		for(int i = 0; i < vecesARepartir; i ++) {
-			if(listRep.size()==1) {
-				momList.add(listRep.get(0));
-				listRep.remove(0);
-			}else if(listRep.size()>1) {
-				int randomMom = GenerarGacelaFile.getRandomIntBetween(0, listRep.size() - 1);
-				momList.add(listRep.get(randomMom));
-				listRep.remove(randomMom);
-			}
+			
+			int randomMom = GenerarGacelaFile.getRandomIntBetween(0, listRep.size() - 1);
+			momList.add(listRep.get(randomMom));
+			listRep.remove(randomMom);
+			
 			if(listRep.size()==1) {
 				dadList.add(listRep.get(0));
 				listRep.remove(0);
-			}else if(listRep.size()>1){
+			}else{
 				int randomDad = GenerarGacelaFile.getRandomIntBetween(0, listRep.size() - 1);
 				dadList.add(listRep.get(randomDad));
 				listRep.remove(randomDad);
 			}
 		}
-		if(momList.size() == dadList.size()) {
-			for(int i = 0; i<momList.size()-1; i++) {
-				bornGacela(dadList.get(i), momList.get(i), viejo, nuevo);
-			}
+		
+		for(int i = 0; i<momList.size(); i++) {
+			bornGacela(dadList.get(i), momList.get(i), viejo, nuevo);
 		}
 	}
 

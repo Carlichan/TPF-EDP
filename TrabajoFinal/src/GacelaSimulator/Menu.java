@@ -1,7 +1,6 @@
 package GacelaSimulator;
 
 import java.io.IOException;
-import java.io.LineNumberInputStream;
 import java.util.HashMap;
 
 import java.util.List;
