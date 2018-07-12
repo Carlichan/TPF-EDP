@@ -1,23 +1,10 @@
 package GacelaSimulator;
 
-import java.util.HashMap;
-
 public class Gacela {
 	private String sequence;
 	private int cualidad;
 	private int generacion;
 	private int deathCause;
-
-	public void deathCauses() {
-		HashMap<Integer,String> fixedSequence = new HashMap<Integer,String>();
-		fixedSequence.put(1,"ACGGTAAAC");  //comida leones
-		fixedSequence.put(2, "AACACGTTG"); // comida cocos
-		fixedSequence.put(3, "GGCTTATGA"); // enfermedad
-		fixedSequence.put(4, "CTCATGTTA"); // hambruna
-		fixedSequence.put(5, "ACTTTACGA"); // alergia
-		fixedSequence.put(6, "CCGATATGT"); // esteril
-		fixedSequence.put(7, "GGTTAAACG"); // 1 hijo
-	}
 
 	public void setSequence(String sequence) {
 		this.sequence = sequence;
@@ -44,7 +31,7 @@ public class Gacela {
 		return this.deathCause;
 	}
 
-	public void mutar(char viejo , char nuevo) { //por ejemplo cambia a por g y g por a		
+	public void mutar(char viejo , char nuevo) { //por ejemplo cambia a por g y g por a	en una secuencia dada
 				String sec = this.getSequence();
 				sec = sec.replace(viejo, 'z');
 				sec = sec.replace(nuevo, 'y');	
@@ -53,16 +40,4 @@ public class Gacela {
 				this.setSequence(sec);	
 
 	}
-	
-	public static void main(String[] args) {
-		String a = "aga";
-		Gacela g = new Gacela();
-		g.setSequence(a);
-		g.mutar('t', 'c');
-		System.out.println(g.getSequence());
-//		if(contiene un gen de muerte muere) {
-//			
-//		}
-	}
-
 }

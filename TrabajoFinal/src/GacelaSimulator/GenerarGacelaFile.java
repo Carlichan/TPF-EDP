@@ -6,26 +6,24 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class GenerarGacelaFile {
-	private final static int BASES_QUANTITY = 50;
-	private final static int FIXED_SEQUENCE_QUANTITY = 9;
-	private final static int GACELA_QUANTITY = 10;
 	private final static String NORMALIZATED_FILE_SEPARATOR = "/";
 
 	public static void main(String[] args) {
-		String gacela ="";
-		for(int i = 0; i < GACELA_QUANTITY ; i++) {
-			gacela += generarGacela();
-			gacela += '\n';
+		String gacelas ="";
+		for(int i = 0; i < 10 ; i++) {
+			gacelas += generarGacela();
+			gacelas += '\n';
 		}
-		System.out.println(gacela);
+		System.out.println(gacelas);
 		try {
-		writeToFile("C:\\Users\\User\\Desktop\\GacelaFile.txt", gacela);
-		
+			writeToFile("C:\\Users\\User\\Desktop\\GacelaFile.txt", gacelas);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	
 	public static String generarGacela() {
 		String gacela = "";
 		HashMap<Integer,String> fixedSequence = new HashMap<Integer,String>();
@@ -37,31 +35,46 @@ public class GenerarGacelaFile {
 		fixedSequence.put(6, "CCGATATGT"); // esteril
 		fixedSequence.put(7, "GGTTAAACG"); // 1 hijo
 		//fixedSequence.put(8, "AAGCCTTCG"); // 2 hijos
-		
-		for(int i = 0; i<BASES_QUANTITY-FIXED_SEQUENCE_QUANTITY ; i++) {
+
+		for(int i = 0; i<23 ; i++) {
 			int a = getRandomIntBetween(1, 4);
-			switch(a) {
-			case 1: 
+			if(a == 1) {
 				gacela += 'A';
-				break;
-			case 2:
+			}
+			else if(a == 2) {
 				gacela += 'C';
-				break;
-			case 3:
+			}
+			else if(a == 3) {
 				gacela += 'G';
-				break;
-			case 4:
+			}
+			else if(a == 4) {
 				gacela += 'T';
-				break;
 			}
 		}
-		int cualidad = getRandomIntBetween(1, 7);
+		int cualidad = getRandomIntBetween(1, 20);
 		if(cualidad > 7)
 			cualidad = 7;
 		gacela += fixedSequence.get(cualidad);
+		
+		for(int i = 0; i<18 ; i++) {
+			int a = getRandomIntBetween(1, 4);
+			if(a == 1) {
+				gacela += 'A';
+			}
+			else if(a == 2) {
+				gacela += 'C';
+			}
+			else if(a == 3) {
+				gacela += 'G';
+			}
+			else if(a == 4) {
+				gacela += 'T';
+			}
+		}
+		
 		return gacela;
 	}
-	
+
 	public static int getRandomIntBetween(int min, int max) {
 		if (max < min) {
 			throw new IllegalArgumentException();
